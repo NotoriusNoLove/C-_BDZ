@@ -90,7 +90,10 @@ public:
 
 int main()
 {
-    Triangle triangle(3, 4, 5);
+    int a, b, c;
+    std::cout << "Введите стороны a, b, c - ";
+    std::cin >> a >> b >> c;
+    Triangle triangle(a, b, c);
     std::cout << "Площадь треугольника: " << triangle.calculateArea() << std::endl;
     std::cout << "Периметр треугольника: " << triangle.calculatePerimeter() << std::endl;
     std::cout << "Высота треугольника: " << triangle.calculateHeight() << std::endl;

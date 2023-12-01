@@ -12,11 +12,16 @@ int factorial(int i)
 
 int main()
 {
-    int n = 4, res;
-    float X = 44;
-    // cin >> n >> X;
+    setlocale(LC_ALL, "Russian");
+    int n, res;
+    float X;
+    cin >> n >> X;
     int steps = 1;
-
+    if (n < 0)
+    {
+        cout << "Ошибка: N должно быть больше 1 ";
+        return 1;
+    }
     for (int i = 1; i <= n; i++)
     {
         if (steps == 1)
@@ -29,8 +34,9 @@ int main()
             res -= pow(X, i) / factorial(2 * i + 1);
             steps = 1;
         }
-
-        cout << "Полученное число является приближенным значением функции sin в точке " << (res);
-        return 0;
     }
+
+    cout << "Полученное число является приближенным значением функции sin в точке " << (res);
+    system("pause");
+    return 0;
 }

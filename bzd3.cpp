@@ -1,49 +1,64 @@
 #include <iostream>
 #include <vector>
 
-void swapMinMaxElements(std::vector<std::vector<int>> &matrix)
-{
-    int m = matrix.size();
-    int n = matrix[0].size();
-
-    for (int j = 0; j < n; j++)
-    {
-        int minIdx = 0;
-        int maxIdx = 0;
-
-        for (int i = 0; i < m; i++)
-        {
-            if (matrix[i][j] < matrix[minIdx][j])
-            {
-                minIdx = i;
-            }
-
-            if (matrix[i][j] > matrix[maxIdx][j])
-            {
-                maxIdx = i;
-            }
-        }
-
-        std::swap(matrix[minIdx][j], matrix[maxIdx][j]);
-    }
-}
-
 int main()
 {
-    // Example usage
-    std::vector<std::vector<int>> matrix = {{1, 2, 3},
-                                            {4, 5, 6},
-                                            {7, 8, 9}};
+    int m, n;
+    std::cout << "Введите количество строк: ";
+    std::cin >> m;
+    std::cout << "Введите количество столбцов: ";
+    std::cin >> n;
 
-    swapMinMaxElements(matrix);
+    std::vector<std::vector<int>> matrix(m, std::vector<int>(n));
 
-    for (const auto &row : matrix)
+    // Ввод элементов матрицы
+    std::cout << "Введите элементы матрицы:n";
+    for (int i = 0; i < m; i++)
     {
-        for (const auto &num : row)
+        for (int j = 0; j < n; j++)
         {
-            std::cout << num << " ";
+            std::cin >> matrix[i][j];
         }
-        std::cout << std::endl;
+    }
+
+    // Проходим по каждому столбцу матрицы
+    for (int j = 0; j < n; j++)
+    {
+        int maxElement = matrix[0][j]; // Максимальный элемент столбца
+        int minElement = matrix[0][j]; // Минимальный элемент столбца
+        int maxIndex = 0;              // Индекс строки с максимальным элементом
+        int minIndex = 0;              // Индекс строки с минимальным элементом
+
+        // Находим максимальный и минимальный элементы в столбце
+        for (int i = 1; i < m; i++)
+        {
+            if (matrix[i][j] > maxElement)
+            {
+                maxElement = matrix[i][j];
+                maxIndex = i;
+            }
+            if (matrix[i][j] < minElement)
+            {
+                minElement = matrix[i][j];
+                minIndex = i;
+            }
+        }
+
+        // Меняем местами максимальный и минимальный элементы
+        int temp = matrix[maxIndex][j];
+        matrix[maxIndex][j] = matrix[minIndex][j];
+        matrix[minIndex][j] = temp;
+    }
+
+    // Вывод преобразованной матрицы
+    std::cout << "Преобразованная матрица:n";
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            std::cout << matrix[i][j] << " ";
+        }
+        std::cout << "n";
     }
 
     return 0;

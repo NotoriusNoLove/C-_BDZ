@@ -1,26 +1,6 @@
 #include <iostream>
 #include <vector>
 
-std::pair<int, int> findMaxSumPair(const std::vector<int> &arr)
-{
-    int maxSum = arr[0] + arr[1];
-    int maxIndex1 = 0;
-    int maxIndex2 = 1;
-
-    for (int i = 1; i < arr.size() - 1; i++)
-    {
-        int sum = arr[i] + arr[i + 1];
-        if (sum > maxSum)
-        {
-            maxSum = sum;
-            maxIndex1 = i;
-            maxIndex2 = i + 1;
-        }
-    }
-
-    return std::make_pair(arr[maxIndex1], arr[maxIndex2]);
-}
-
 int main()
 {
     int N;
@@ -34,8 +14,23 @@ int main()
         std::cin >> arr[i];
     }
 
-    std::pair<int, int> maxSumPair = findMaxSumPair(arr);
-    std::cout << "Соседние элементы с максимальной суммой: " << maxSumPair.first << " " << maxSumPair.second << std::endl;
+    int maxSum = arr[0] + arr[1]; // Изначально считаем, что максимальная сумма это сумма первых двух элементов
+    int maxIndex1 = 0;            // Индекс первого элемента с максимальной суммой
+    int maxIndex2 = 1;            // Индекс второго элемента с максимальной суммой
+
+    for (int i = 1; i < N - 1; i++)
+    {
+        int sum = arr[i] + arr[i + 1]; // Вычисляем сумму текущих соседних элементов
+
+        if (sum > maxSum)
+        {
+            maxSum = sum;      // Обновляем максимальную сумму
+            maxIndex1 = i;     // Обновляем индекс первого элемента
+            maxIndex2 = i + 1; // Обновляем индекс второго элемента
+        }
+    }
+
+    std::cout << "Два соседних элемента с максимальной суммой: " << arr[maxIndex1] << " и " << arr[maxIndex2] << std::endl;
 
     return 0;
 }
